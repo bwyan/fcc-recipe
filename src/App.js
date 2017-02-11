@@ -1,14 +1,18 @@
 import React, {Component} from 'react';
+import Header from './components/Header.js';
+import RecipeList from './components/RecipeList.js';
 
 //styles
-import './stylesheets/App.scss';
+import './App.scss';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>Recipes</h1>
-        <p>App <span>Goes</span> Here</p>
+        <Header />
+        <main>
+        	<RecipeList />
+        </main>
       </div>
     )
   }

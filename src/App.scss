@@ -1,0 +1,35 @@
+$lime: rgb(178, 215, 44);
+$green: rgb(29,122, 92);
+$blue: rgb(6, 51, 70);
+$yellow: rgb(250, 218, 22);
+$orange: rgb(249, 93, 8);
+
+.configs {
+  li {
+    margin: 15px 0px;
+  }
+}
+
+body {
+  box-sizing: border-box;
+}
+
+header {
+  position: absolute;
+  top: 0;
+  height: 50px;
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid $green;
+  background-color: $green;
+}
+
+h1 {
+  font-size: 18px;
+  color: white;
+  vertical-align: center;
+}
+
+.recipes {
+  margin-top: 60px;
+}
