@@ -8,6 +8,8 @@ class RecipeList extends React.Component {
 					<li>Black Bean Soup</li>
 					<li>Angel Food Cake</li>
 					<li>Braised Lamb Shanks</li>
+					<li>Ginger Pear Smoothie</li>
+					<li>Seared Brussels Sprouts</li>
 				</ol>
 			</div>
 		)
