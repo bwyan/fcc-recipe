@@ -1,15 +1,21 @@
 import React from 'react';
 
 class Recipe extends React.Component {
+	
+	showDetails() {
+
+	}
+
 	render() {
 		return(
-			<div>
-				<h2>Recipe Name</h2>
-				<ol>
-					<li>Water</li>
-					<li>Coffee beans</li>
-				</ol>
-			</div>
+			<li>
+				<div>
+					<span>{this.props.details.name}</span>
+					<ol>
+						{this.props.details.ingredients.map(i => <li key={i.id}>{i}</li>) }
+					</ol>
+				</div>
+			</li>
 		)
 	}
 }

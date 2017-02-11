@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Header from './components/Header.js';
 import RecipeList from './components/RecipeList.js';
-import Recipe from './components/Recipe.js';
+import Editor from './components/Editor.js';
 
 //styles
 import './App.scss';
@@ -10,10 +10,20 @@ class App extends Component {
   constructor() {
   	super();
 
-  	this.state = {
-  		recipes: [],
+  	this.addRecipe = this.addRecipe.bind(this)
 
+  	this.state = {
+  		recipes: {}
   	}
+  }
+
+  addRecipe(recipe) {
+  	const recipes = {...this.state.recipes};
+
+  	const timestamp = Date.now();
+		recipes[`recipe-${timestamp}`] = recipe;
+
+		this.setState({ recipes });
   }
 
   render() {
@@ -21,8 +31,8 @@ class App extends Component {
       <div className="App">
         <Header />
         <main>
-        	<RecipeList />
-        	<Recipe />
+        	<RecipeList recipes={this.state.recipes}/>
+        	<Editor addRecipe={this.addRecipe} />
         </main>
       </div>
     )

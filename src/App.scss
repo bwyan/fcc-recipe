@@ -4,12 +4,6 @@ $blue: rgb(6, 51, 70);
 $yellow: rgb(250, 218, 22);
 $orange: rgb(249, 93, 8);
 
-.configs {
-  li {
-    margin: 15px 0px;
-  }
-}
-
 body {
   box-sizing: border-box;
 }
@@ -33,3 +27,22 @@ h1 {
 .recipes {
   margin-top: 60px;
 }
+
+form {
+  label {
+    display: block;
+    margin: 20px 0 0 20px;;
+  }
+
+  input, textarea, button {
+    display: block;
+    border: 1px solid $blue;
+    margin: 10px 0 0 0;
+  }
+
+  button {
+    margin: 10px 0 0 20px;
+  }
+}
+
+
