@@ -1,5 +1,5 @@
 import React from 'react';
-import Recipe from './Recipe.js'
+import RecipeListItem from './RecipeListItem.js'
 
 class RecipeList extends React.Component {
 	render() {
@@ -10,7 +10,7 @@ class RecipeList extends React.Component {
 					{
 						Object
 							.keys(this.props.recipes)
-							.map(key => <Recipe key={key} details={this.props.recipes[key]} />)
+							.map(key => <RecipeListItem key={key} recipeID={key} details={this.props.recipes[key]} setCurrentRecipe={this.props.setCurrentRecipe}/>)
 					}
 				</ul>
 			</div>

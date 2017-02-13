@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Header from './components/Header.js';
 import RecipeList from './components/RecipeList.js';
+import RecipeViewer from './components/RecipeViewer.js'
 import Editor from './components/Editor.js';
 
 //styles
@@ -10,10 +11,12 @@ class App extends Component {
   constructor() {
   	super();
 
-  	this.addRecipe = this.addRecipe.bind(this)
+  	this.addRecipe = this.addRecipe.bind(this);
+  	this.setCurrentRecipe = this.setCurrentRecipe.bind(this);
 
   	this.state = {
-  		recipes: {}
+  		recipes: {},
+  		currentRecipe: null
   	}
   }
 
@@ -26,13 +29,18 @@ class App extends Component {
 		this.setState({ recipes });
   }
 
+  setCurrentRecipe(key) {
+  	this.setState({currentRecipe: key});
+  }
+
   render() {
     return (
-      <div className="App">
+       <div className="App">
         <Header />
         <main>
-        	<RecipeList recipes={this.state.recipes}/>
+        	<RecipeList recipes={this.state.recipes} setCurrentRecipe={this.setCurrentRecipe}/>
         	<Editor addRecipe={this.addRecipe} />
+			 		<RecipeViewer recipe={this.state.recipes[this.state.currentRecipe] || {name: '', ingredients: []}}/>
         </main>
       </div>
     )
@@ -40,3 +48,5 @@ class App extends Component {
 }
 
 export default App;
+
+        	
