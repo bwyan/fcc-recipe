@@ -17,6 +17,7 @@ class Editor extends React.Component {
 		console.log(recipe);
 
 		this.props.addRecipe(recipe);
+		this.props.closeEditor();
 		this.recipeForm.reset();
 	}
 
@@ -31,6 +32,7 @@ class Editor extends React.Component {
 							type="text"
 							name="recipe-name"
 							ref={input => this.name = input}
+							defaultValue={this.props.recipe.name}
 						/>
 					</label>
 					<label htmlFor="ingredients">
@@ -39,6 +41,7 @@ class Editor extends React.Component {
 							name="ingredients"
 							default="coffee, water, love"
 							ref={input => this.ingredients = input}
+							defaultValue={this.props.recipe.ingredients}
 						/>
 					</label>
 					<button type="submit">Save</button>
@@ -46,6 +49,10 @@ class Editor extends React.Component {
 			</div>
 		)	
 	}
+}
+
+Editor.defaultProps = {
+	recipe: {name: '', ingredients: []}
 }
 
 export default Editor;

@@ -9,6 +9,7 @@ class RecipeViewer extends React.Component {
 				<ul>
 					{this.props.recipe.ingredients.map(ingredient => <li key={ingredient.id}>{ingredient}</li>)}
 				</ul>
+				<button>Edit Recipe</button>
 			</div>
 		)
 	}

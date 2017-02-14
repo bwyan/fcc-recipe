@@ -13,11 +13,23 @@ class App extends Component {
 
   	this.addRecipe = this.addRecipe.bind(this);
   	this.setCurrentRecipe = this.setCurrentRecipe.bind(this);
+  	this.openEditor = this.openEditor.bind(this);
+  	this.closeEditor = this.closeEditor.bind(this);
 
   	this.state = {
   		recipes: {},
-  		currentRecipe: null
+  		currentRecipe: null,
+  		editorIsVisible: false,
+  		recipeToBeEdited: null
   	}
+  }
+
+  openEditor() {
+  	this.setState({editorIsVisible: true});
+  }
+
+  closeEditor() {
+  	this.setState({editorIsVisible: false});
   }
 
   addRecipe(recipe) {
@@ -34,13 +46,30 @@ class App extends Component {
   }
 
   render() {
+    let editor = null;
+
+    if (this.state.editorIsVisible) {
+    	editor = <Editor
+    							addRecipe={this.addRecipe}
+    							closeEditor={this.closeEditor}
+    							recipe={this.state.recipes[this.state.recipeToBeEdited]}
+  							/>;
+    } else {
+    	editor = null;
+    }
+
     return (
        <div className="App">
         <Header />
         <main>
-        	<RecipeList recipes={this.state.recipes} setCurrentRecipe={this.setCurrentRecipe}/>
-        	<Editor addRecipe={this.addRecipe} />
-			 		<RecipeViewer recipe={this.state.recipes[this.state.currentRecipe] || {name: '', ingredients: []}}/>
+        	{editor}
+        	<div className="sidebar">
+	        	<RecipeList recipes={this.state.recipes} setCurrentRecipe={this.setCurrentRecipe}/>
+	        	<button onClick={this.openEditor}>New Recipe</button>
+	        </div>
+	        <div className="content">
+	        	<RecipeViewer recipe={this.state.recipes[this.state.currentRecipe] || {name: '', ingredients: []}}/>
+	        </div>
         </main>
       </div>
     )
