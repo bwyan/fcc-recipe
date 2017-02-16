@@ -1,6 +1,7 @@
 import React from 'react';
 
 class RecipeViewer extends React.Component {
+
 	render() {
 		return(
 			<div>
@@ -9,7 +10,7 @@ class RecipeViewer extends React.Component {
 				<ul>
 					{this.props.recipe.ingredients.map(ingredient => <li key={ingredient.id}>{ingredient}</li>)}
 				</ul>
-				<button>Edit Recipe</button>
+				<button onClick={this.props.openEditor}>Edit Recipe</button>
 			</div>
 		)
 	}

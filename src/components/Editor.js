@@ -1,7 +1,7 @@
 import React from 'react';
 
 class Editor extends React.Component {
-	createRecipe(event) {
+	handleSubmitButton(event) {
 		event.preventDefault();
 
 
@@ -16,7 +16,7 @@ class Editor extends React.Component {
 
 		console.log(recipe);
 
-		this.props.addRecipe(recipe);
+		this.props.addRecipe(recipe);	
 		this.props.closeEditor();
 		this.recipeForm.reset();
 	}
@@ -25,7 +25,7 @@ class Editor extends React.Component {
 		return(
 			<div>
 				<h2>Editor</h2>
-				<form ref={input => this.recipeForm = input} onSubmit={(e) => this.createRecipe(e)}>
+				<form ref={input => this.recipeForm = input} onSubmit={(e) => this.handleSubmitButton(e)}>
 					<label htmlFor="recipe-name">
 						Recipe Name
 						<input

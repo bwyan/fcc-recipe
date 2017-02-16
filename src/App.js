@@ -11,18 +11,19 @@ class App extends Component {
   constructor() {
   	super();
 
-  	this.addRecipe = this.addRecipe.bind(this);
-  	this.setCurrentRecipe = this.setCurrentRecipe.bind(this);
   	this.openEditor = this.openEditor.bind(this);
   	this.closeEditor = this.closeEditor.bind(this);
+  	this.addRecipe = this.addRecipe.bind(this);
+  	this.setCurrentRecipe = this.setCurrentRecipe.bind(this);
+  	this.handleNewRecipeButton = this.handleNewRecipeButton.bind(this);
 
   	this.state = {
   		recipes: {},
   		currentRecipe: null,
-  		editorIsVisible: false,
-  		recipeToBeEdited: null
+  		editorIsVisible: false
   	}
   }
+
 
   openEditor() {
   	this.setState({editorIsVisible: true});
@@ -35,8 +36,12 @@ class App extends Component {
   addRecipe(recipe) {
   	const recipes = {...this.state.recipes};
 
-  	const timestamp = Date.now();
-		recipes[`recipe-${timestamp}`] = recipe;
+  	if (!this.state.currentRecipe) {
+	  	const timestamp = Date.now();
+			recipes[`recipe-${timestamp}`] = recipe;  		
+  	} else {
+  		recipes[this.state.currentRecipe] = recipe;
+  	}
 
 		this.setState({ recipes });
   }
@@ -45,17 +50,33 @@ class App extends Component {
   	this.setState({currentRecipe: key});
   }
 
+  handleNewRecipeButton() {
+  	this.setState({currentRecipe: null});
+  	this.openEditor();
+  }
+
   render() {
     let editor = null;
+    let recipeViewer = null;
 
     if (this.state.editorIsVisible) {
     	editor = <Editor
     							addRecipe={this.addRecipe}
     							closeEditor={this.closeEditor}
-    							recipe={this.state.recipes[this.state.recipeToBeEdited]}
+    							recipe={this.state.recipes[this.state.currentRecipe]}
+    							recipeID={this.state.currentRecipe}
   							/>;
     } else {
     	editor = null;
+    }
+
+    if (this.state.currentRecipe != null) {
+    	recipeViewer = <RecipeViewer
+    		recipe={this.state.recipes[this.state.currentRecipe] || {name: '', ingredients: []}}
+    		openEditor={this.openEditor}
+  		/>
+    } else {
+    	recipeViewer = null;
     }
 
     return (
@@ -65,10 +86,10 @@ class App extends Component {
         	{editor}
         	<div className="sidebar">
 	        	<RecipeList recipes={this.state.recipes} setCurrentRecipe={this.setCurrentRecipe}/>
-	        	<button onClick={this.openEditor}>New Recipe</button>
+	        	<button onClick={this.handleNewRecipeButton}>New Recipe</button>
 	        </div>
 	        <div className="content">
-	        	<RecipeViewer recipe={this.state.recipes[this.state.currentRecipe] || {name: '', ingredients: []}}/>
+	        	{recipeViewer}
 	        </div>
         </main>
       </div>
