@@ -59,6 +59,8 @@ class App extends Component {
     let editor = null;
     let recipeViewer = null;
 
+    //TODO: Refactor. Move these two if statements into the return function as ternary expressions.
+
     if (this.state.editorIsVisible) {
     	editor = <Editor
     							addRecipe={this.addRecipe}
