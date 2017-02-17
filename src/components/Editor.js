@@ -39,7 +39,6 @@ class Editor extends React.Component {
 						Ingredients
 						<textarea
 							name="ingredients"
-							default="coffee, water, love"
 							ref={input => this.ingredients = input}
 							defaultValue={this.props.recipe.ingredients}
 						/>

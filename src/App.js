@@ -24,7 +24,27 @@ class App extends Component {
   	}
   }
 
+  //Lifecycle
+  componentWillMount() {
+  	const recipeBox = JSON.parse(localStorage.getItem('recipeBox'));
 
+  	if(recipeBox) {
+	  	this.setState({
+				currentRecipe: recipeBox.currentRecipe,
+				editorIsVisible: recipeBox.editorIsVisible,
+				recipes: recipeBox.recipes
+	  	});  		
+  	}
+
+
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+  	localStorage.setItem('recipeBox', JSON.stringify(nextState));
+  }
+
+
+  //UI Helpers
   openEditor() {
   	this.setState({editorIsVisible: true});
   }
@@ -33,6 +53,7 @@ class App extends Component {
   	this.setState({editorIsVisible: false});
   }
 
+  //State Management
   addRecipe(recipe) {
   	const recipes = {...this.state.recipes};
 
@@ -50,48 +71,40 @@ class App extends Component {
   	this.setState({currentRecipe: key});
   }
 
+  //Event Handers
   handleNewRecipeButton() {
   	this.setState({currentRecipe: null});
   	this.openEditor();
   }
 
   render() {
-    let editor = null;
-    let recipeViewer = null;
-
-    //TODO: Refactor. Move these two if statements into the return function as ternary expressions.
-
-    if (this.state.editorIsVisible) {
-    	editor = <Editor
-    							addRecipe={this.addRecipe}
-    							closeEditor={this.closeEditor}
-    							recipe={this.state.recipes[this.state.currentRecipe]}
-    							recipeID={this.state.currentRecipe}
-  							/>;
-    } else {
-    	editor = null;
-    }
-
-    if (this.state.currentRecipe != null) {
-    	recipeViewer = <RecipeViewer
-    		recipe={this.state.recipes[this.state.currentRecipe] || {name: '', ingredients: []}}
-    		openEditor={this.openEditor}
-  		/>
-    } else {
-    	recipeViewer = null;
-    }
-
     return (
        <div className="App">
         <Header />
         <main>
-        	{editor}
+        	{
+        		this.state.editorIsVisible
+        		? <Editor
+    							addRecipe={this.addRecipe}
+    							closeEditor={this.closeEditor}
+    							recipe={this.state.recipes[this.state.currentRecipe]}
+    							recipeID={this.state.currentRecipe}
+  							/>
+  					: null
+        	}
         	<div className="sidebar">
 	        	<RecipeList recipes={this.state.recipes} setCurrentRecipe={this.setCurrentRecipe}/>
 	        	<button onClick={this.handleNewRecipeButton}>New Recipe</button>
 	        </div>
 	        <div className="content">
-	        	{recipeViewer}
+	        	{
+	        		this.state.currentRecipe != null
+	        		? <RecipeViewer
+    							recipe={this.state.recipes[this.state.currentRecipe] || {name: '', ingredients: []}}
+    							openEditor={this.openEditor}
+  							/>
+  						: null
+						}
 	        </div>
         </main>
       </div>
