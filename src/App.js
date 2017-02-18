@@ -14,6 +14,7 @@ class App extends Component {
   	this.openEditor = this.openEditor.bind(this);
   	this.closeEditor = this.closeEditor.bind(this);
   	this.addRecipe = this.addRecipe.bind(this);
+  	this.deleteRecipe = this.deleteRecipe.bind(this);
   	this.setCurrentRecipe = this.setCurrentRecipe.bind(this);
   	this.handleNewRecipeButton = this.handleNewRecipeButton.bind(this);
 
@@ -71,6 +72,15 @@ class App extends Component {
   	this.setState({currentRecipe: key});
   }
 
+  deleteRecipe(recipe) {
+  	const recipes = {...this.state.recipes};
+
+  	delete recipes[recipe];
+
+  	// this.setState({ recipes });
+  	this.setState({recipes, currentRecipe: null});
+  }
+
   //Event Handers
   handleNewRecipeButton() {
   	this.setState({currentRecipe: null});
@@ -102,6 +112,8 @@ class App extends Component {
 	        		? <RecipeViewer
     							recipe={this.state.recipes[this.state.currentRecipe] || {name: '', ingredients: []}}
     							openEditor={this.openEditor}
+    							deleteRecipe={this.deleteRecipe}
+    							recipeID={this.state.currentRecipe}
   							/>
   						: null
 						}
