@@ -18,14 +18,28 @@ header {
   background-color: $green;
 }
 
+main {
+  margin-top: 60px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
 h1 {
   font-size: 18px;
   color: white;
   vertical-align: center;
 }
 
+.sidebar {
+  min-width: 240px;
+  max-width: 375px;
+}
+
+.content {
+  min-width: 240px;
+}
+
 .recipes {
-  margin-top: 60px;
 }
 
 form {

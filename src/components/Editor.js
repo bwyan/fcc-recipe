@@ -14,16 +14,20 @@ class Editor extends React.Component {
 				.filter(ingredient => ingredient !== '')
 		}
 
-		console.log(recipe);
-
 		this.props.addRecipe(recipe);	
 		this.props.closeEditor();
 		this.recipeForm.reset();
 	}
 
+	handleCancelButton(event) {
+		event.preventDefault();
+
+		this.props.closeEditor();
+	}
+
 	render() {
 		return(
-			<div>
+			<div key={this.props.recipeID}>
 				<h2>Editor</h2>
 				<form ref={input => this.recipeForm = input} onSubmit={(e) => this.handleSubmitButton(e)}>
 					<label htmlFor="recipe-name">
@@ -44,6 +48,7 @@ class Editor extends React.Component {
 						/>
 					</label>
 					<button type="submit">Save</button>
+					<button onClick={(e) => this.handleCancelButton(e)}>Cancel</button>
 				</form>
 			</div>
 		)	
