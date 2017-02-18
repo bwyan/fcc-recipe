@@ -10,7 +10,7 @@ class RecipeViewer extends React.Component {
 				<ul>
 					{this.props.recipe.ingredients.map((ingredient, index) => <li key={index}>{ingredient}</li>)}
 				</ul>
-				<button onClick={() => this.props.openEditor}>Edit Recipe</button>
+				<button onClick={this.props.openEditor}>Edit Recipe</button>
 				<button onClick={() => this.props.deleteRecipe(this.props.recipeID)}>Delete Recipe</button>
 			</div>
 		)
