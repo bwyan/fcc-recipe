@@ -1,3 +1,5 @@
+//@import './reset.css';
+
 $lime: rgb(178, 215, 44);
 $green: rgb(29,122, 92);
 $blue: rgb(6, 51, 70);
@@ -9,6 +11,9 @@ body {
 }
 
 header {
+  box-sizing: border-box;
+  display: flex;
+  flex-align: center;
   position: absolute;
   top: 0;
   height: 50px;
@@ -16,30 +21,76 @@ header {
   text-align: center;
   border-bottom: 1px solid $green;
   background-color: $green;
+
+  button {
+    margin: 0 20px 0 10px;
+    height: 30px;
+    align-self: center;
+    background-color: $green;
+    color: white;
+    border: 1px solid white;
+  }
 }
 
 main {
-  margin-top: 60px;
+  margin-top: 50px;
   display: flex;
   flex-wrap: wrap;
 }
 
 h1 {
-  font-size: 18px;
+  font-size: 15px;
   color: white;
-  vertical-align: center;
+  display: table-cell;
+  vertical-align: middle;
 }
 
+
 .sidebar {
-  min-width: 240px;
+  box-sizing: border-box;
+  min-width: 320px;
   max-width: 375px;
+  border-right: 1px solid $lime;
+  padding: 20px 20px 0 20px;
+  z-index: 999;
+  position: absolute;
+  height: 100%;
+  background-color: white;
+
+  transition: .5s;
+
+  .new-recipe-button {
+    border: 1px solid black;
+    background-color: white;
+    font-weight: bold;
+  }
+}
+
+.hidden {
+  margin-left: -375px;
+  background-color: none;
 }
 
 .content {
-  min-width: 240px;
+  min-width: 320px;
+  max-width: 600px;
+  padding: 0 20px 0 20px;
+  z-index: 0;
+
+  button {
+    border: 1px solid black;
+    background-color: white;
+    font-weight: bold;
+    margin-right: 10px;
+  }
 }
 
-.recipes {
+.recipe-list {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;  
+  }
 }
 
 form {
@@ -59,4 +110,30 @@ form {
   }
 }
 
+// @media(min-width: 640px) {
+//   header {
+//     padding: 0 0 0 20px;
+
+//     button {
+//       display: none;
+//     }
+
+//     h1 {
+//       align-self: center;
+//     }
+//   }
+
+//   .sidebar {
+//     z-index: 0;
+//   }
+
+//   .hidden {
+//     margin-left: 0px;
+//     background-color: white;
+//   }
+
+//   .content {
+//     z-index: 0;
+//   }
+// }
 
