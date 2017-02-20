@@ -4,8 +4,7 @@ import RecipeListItem from './RecipeListItem.js'
 class RecipeList extends React.Component {
 	render() {
 		return(
-			<div className="recipes">
-				<h2>Recipe List</h2>
+			<div className="recipe-list" role="list" aria-label="recipes">
 				<ul>
 					{
 						Object

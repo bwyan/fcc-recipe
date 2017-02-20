@@ -15,6 +15,7 @@ class App extends Component {
 
   	this.openEditor = this.openEditor.bind(this);
   	this.closeEditor = this.closeEditor.bind(this);
+  	this.toggleSidebar = this.toggleSidebar.bind(this);
   	this.addRecipe = this.addRecipe.bind(this);
   	this.deleteRecipe = this.deleteRecipe.bind(this);
   	this.setCurrentRecipe = this.setCurrentRecipe.bind(this);
@@ -23,7 +24,8 @@ class App extends Component {
   	this.state = {
   		recipes: {},
   		currentRecipe: null,
-  		editorIsVisible: false
+  		editorIsVisible: false,
+  		sidebarIsExpanded: true
   	}
   }
 
@@ -35,11 +37,13 @@ class App extends Component {
 	  	this.setState({
 				currentRecipe: recipeBox.currentRecipe,
 				editorIsVisible: recipeBox.editorIsVisible,
+				sidebarIsExpanded: recipeBox.sidebarIsExpanded,
 				recipes: recipeBox.recipes
 	  	});  		
   	} else {
   		this.setState({
-  			recipes: SampleRecipes
+  			recipes: SampleRecipes,
+  			currentRecipe: 'recipe-1'
   		})
   	}
 
@@ -58,6 +62,10 @@ class App extends Component {
 
   closeEditor() {
   	this.setState({editorIsVisible: false});
+  }
+
+  toggleSidebar() {
+  	this.setState({sidebarIsExpanded: !this.state.sidebarIsExpanded});
   }
 
   //State Management
@@ -89,17 +97,18 @@ class App extends Component {
   //Event Handers
   handleNewRecipeButton() {
   	this.setState({currentRecipe: null});
+  	this.toggleSidebar();
   	this.openEditor();
   }
 
   render() {
     return (
        <div className="App">
-        <Header />
+        <Header toggleSidebar={this.toggleSidebar} sidebarIsExpanded={this.state.sidebarIsExpanded}/>
         <main>
-        	<div className="sidebar">
+        	<div className={this.state.sidebarIsExpanded ? 'sidebar' : 'sidebar hidden'}>
+	        	<button onClick={this.handleNewRecipeButton} className="new-recipe-button">New Recipe</button>
 	        	<RecipeList recipes={this.state.recipes} setCurrentRecipe={this.setCurrentRecipe}/>
-	        	<button onClick={this.handleNewRecipeButton}>New Recipe</button>
 	        </div>
 	        <div className="content">
 	        	{
