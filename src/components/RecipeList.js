@@ -9,7 +9,14 @@ class RecipeList extends React.Component {
 					{
 						Object
 							.keys(this.props.recipes)
-							.map(key => <RecipeListItem key={key} recipeID={key} details={this.props.recipes[key]} setCurrentRecipe={this.props.setCurrentRecipe}/>)
+							.map(key => <RecipeListItem
+														key={key}
+														recipeID={key}
+														details={this.props.recipes[key]}
+														setCurrentRecipe={this.props.setCurrentRecipe}
+														closeSidebar={this.props.closeSidebar}
+														closeEditor={this.props.closeEditor}
+													/>)
 					}
 				</ul>
 			</div>

@@ -16,6 +16,8 @@ class App extends Component {
   	this.openEditor = this.openEditor.bind(this);
   	this.closeEditor = this.closeEditor.bind(this);
   	this.toggleSidebar = this.toggleSidebar.bind(this);
+  	this.closeSidebar = this.closeSidebar.bind(this);
+  	this.openSidebar = this.openSidebar.bind(this);
   	this.addRecipe = this.addRecipe.bind(this);
   	this.deleteRecipe = this.deleteRecipe.bind(this);
   	this.setCurrentRecipe = this.setCurrentRecipe.bind(this);
@@ -65,7 +67,15 @@ class App extends Component {
   }
 
   toggleSidebar() {
-  	this.setState({sidebarIsExpanded: !this.state.sidebarIsExpanded});
+		this.setState({sidebarIsExpanded: !this.state.sidebarIsExpanded});
+  }
+
+  closeSidebar() {
+  	this.setState({sidebarIsExpanded: false})
+  }
+
+  openSidebar() {
+  	this.setState({sidebarIsExpanded: true})
   }
 
   //State Management
@@ -73,13 +83,14 @@ class App extends Component {
   	const recipes = {...this.state.recipes};
 
   	if (!this.state.currentRecipe) {
-	  	const timestamp = Date.now();
-			recipes[`recipe-${timestamp}`] = recipe;  		
+	  	const recipeID = `recipe-${Date.now()}`;
+			recipes[recipeID] = recipe;
+			this.setCurrentRecipe(recipeID);
   	} else {
   		recipes[this.state.currentRecipe] = recipe;
   	}
 
-		this.setState({ recipes });
+		this.setState({ recipes });	
   }
 
   setCurrentRecipe(key) {
@@ -108,7 +119,12 @@ class App extends Component {
         <main>
         	<div className={this.state.sidebarIsExpanded ? 'sidebar' : 'sidebar hidden'}>
 	        	<button onClick={this.handleNewRecipeButton} className="new-recipe-button">New Recipe</button>
-	        	<RecipeList recipes={this.state.recipes} setCurrentRecipe={this.setCurrentRecipe}/>
+	        	<RecipeList
+	        		recipes={this.state.recipes}
+	        		setCurrentRecipe={this.setCurrentRecipe}
+	        		closeEditor={this.closeEditor}
+	        		closeSidebar={this.closeSidebar}
+        		/>
 	        </div>
 	        <div className="content">
 	        	{
@@ -116,6 +132,7 @@ class App extends Component {
 	        		? <Editor
 	    							addRecipe={this.addRecipe}
 	    							closeEditor={this.closeEditor}
+	    							openSidebar={this.openSidebar}
 	    							recipe={this.state.recipes[this.state.currentRecipe]}
 	    							recipeID={this.state.currentRecipe}
 	  							/>
@@ -125,7 +142,8 @@ class App extends Component {
 	        		this.state.currentRecipe != null && !this.state.editorIsVisible
 	        		? <RecipeViewer
     							recipe={this.state.recipes[this.state.currentRecipe] || {name: '', ingredients: []}}
-    							openEditor={this.openEditor}
+    							openEditor={this.openEditor}  
+    							openSidebar={this.openSidebar}  							
     							deleteRecipe={this.deleteRecipe}
     							recipeID={this.state.currentRecipe}
   							/>

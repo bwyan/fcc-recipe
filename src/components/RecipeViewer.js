@@ -1,6 +1,11 @@
 import React from 'react';
 
 class RecipeViewer extends React.Component {
+	handleDeleteButton(e) {
+		e.preventDefault();
+		this.props.deleteRecipe(this.props.recipeID);
+		this.props.openSidebar();
+	}
 
 	render() {
 		return(
@@ -11,7 +16,7 @@ class RecipeViewer extends React.Component {
 					{this.props.recipe.ingredients.map((ingredient, index) => <li key={index}>{ingredient}</li>)}
 				</ul>
 				<button onClick={this.props.openEditor}>Edit Recipe</button>
-				<button onClick={() => this.props.deleteRecipe(this.props.recipeID)}>Delete Recipe</button>
+				<button onClick={e => this.handleDeleteButton(e)}>Delete Recipe</button>
 			</div>
 		)
 	}

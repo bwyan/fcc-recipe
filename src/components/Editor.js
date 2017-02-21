@@ -4,8 +4,6 @@ class Editor extends React.Component {
 	handleSubmitButton(event) {
 		event.preventDefault();
 
-
-
 		const recipe = {
 			name: this.name.value.trim(),
 			ingredients: this.ingredients.value
@@ -23,12 +21,13 @@ class Editor extends React.Component {
 		event.preventDefault();
 
 		this.props.closeEditor();
+		if(this.props.recipeID === null) {this.props.openSidebar()};		
 	}
 
 	render() {
 		return(
 			<div key={this.props.recipeID}>
-				<h2>Editor</h2>
+				<h2>New Recipe</h2>
 				<form ref={input => this.recipeForm = input} onSubmit={(e) => this.handleSubmitButton(e)}>
 					<label htmlFor="recipe-name">
 						Recipe Name

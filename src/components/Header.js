@@ -14,7 +14,7 @@ class Header extends React.Component {
         	{this.props.sidebarIsExpanded ? '< []' : '[] >'}
         </button>
 
-        <h1>Cocktail Recipes (work in progress)</h1>
+        <h1>Cocktail Recipes</h1>
         <div className="menu"></div>
       </header>
 		)
