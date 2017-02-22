@@ -3,6 +3,7 @@ import Header from './components/Header.js';
 import RecipeList from './components/RecipeList.js';
 import RecipeViewer from './components/RecipeViewer.js'
 import Editor from './components/Editor.js';
+import DimmerLayer from './components/DimmerLayer.js';
 
 import SampleRecipes from './components/SampleRecipes.js'
 
@@ -126,7 +127,11 @@ class App extends Component {
 	        		closeSidebar={this.closeSidebar}
         		/>
 	        </div>
+
+	        
+
 	        <div className="content">
+	        	<DimmerLayer closeSidebar={this.closeSidebar} sidebarIsExpanded={this.state.sidebarIsExpanded}/>
 	        	{
 	        		this.state.editorIsVisible
 	        		? <Editor
