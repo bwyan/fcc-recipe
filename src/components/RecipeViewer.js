@@ -9,7 +9,7 @@ class RecipeViewer extends React.Component {
 
 	render() {
 		return(
-			<div>
+			<div className="recipe-viewer">
 				<h2>{this.props.recipe.name ? this.props.recipe.name : ''}</h2>
 				<h3>Ingredients</h3>
 				<ul>
