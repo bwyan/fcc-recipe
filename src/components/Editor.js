@@ -27,7 +27,6 @@ class Editor extends React.Component {
 	render() {
 		return(
 			<div key={this.props.recipeID}>
-				<h2>New Recipe</h2>
 				<form ref={input => this.recipeForm = input} onSubmit={(e) => this.handleSubmitButton(e)}>
 					<label htmlFor="recipe-name">
 						Recipe Name
