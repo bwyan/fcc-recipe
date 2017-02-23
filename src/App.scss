@@ -103,13 +103,13 @@ h1 {
     margin: 0;
     background-color: black;
     opacity: 0.7;
-    // visibility: visible; TODO: Fix these so they work with transitions (use keyframes?)
+    visibility: visible; //TODO: Fix these so they work with transitions (use keyframes?)
     transition: opacity .5s;
   }
 
   .dimmer-layer.hidden {
     background-color: black;
-    // visibility: hidden;
+    visibility: hidden;
     opacity: 0;
     transition: opacity .5s; 
   }
