@@ -129,9 +129,9 @@ class App extends Component {
 	        </div>
 
 	        
-
+	        <DimmerLayer closeSidebar={this.closeSidebar} sidebarIsExpanded={this.state.sidebarIsExpanded}/>
 	        <div className="content">
-	        	<DimmerLayer closeSidebar={this.closeSidebar} sidebarIsExpanded={this.state.sidebarIsExpanded}/>
+	        	
 	        	{
 	        		this.state.editorIsVisible
 	        		? <Editor

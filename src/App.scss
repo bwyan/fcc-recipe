@@ -9,8 +9,13 @@ $orange: rgb(249, 93, 8);
 html, body {
   height: 100%;
   width: 100%;
-  overflow: auto;
-  position: fixed;
+  margin: 0;
+}
+
+.App {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
 }
 
 body {
@@ -20,6 +25,7 @@ body {
 header {
   position: fixed;
   top: 0;
+  flex: 0 1 auto;
   box-sizing: border-box;
   display: flex;
   height: 50px;
@@ -48,6 +54,7 @@ main {
   flex-wrap: wrap;
   z-index: 0;
   margin-top: 50px;
+  width: 100vw;
 }
 
 h1 {
@@ -63,20 +70,21 @@ h1 {
   min-width: 290px;
   max-width: 375px;
   border-right: 1px solid #666;
-  padding: 20px 20px 0 20px;
+  padding: 70px 20px 0 20px;
   z-index: 999;
-  position: absolute;
-  height: calc(100vh - 50px);
-  background-color: white;
-
-  transition: margin .3s;
+  top: 0;
+  bottom: 0;
+  position: fixed;
   overflow: scroll;
   -webkit-overflow-scrolling: touch;
+  background-color: white;
+  transition: margin .3s;
 
   .new-recipe-button {
     border: 1px solid black;
     background-color: white;
     font-weight: bold;
+    height: 25px;
   }
 }
 
@@ -85,21 +93,11 @@ h1 {
   background-color: none;
 }
 
-.content {
-  box-sizing: border-box;
-  min-width: 320px;
-  max-width: 600px;
-  padding: 0;
-  z-index: 0;
-  height: calc(100vh - 50px);
-  overflow: scroll;
-  -webkit-overflow-scrolling: touch;
-
   .dimmer-layer {
-    width: 100vw;
-    height: calc(100% - 50px);
+    width: 100%;
+    height: calc(100vh - 50px);
     z-index: 998;
-    position: absolute;
+    position: fixed;
     margin: 0;
     background-color: black;
     opacity: 0.7;
@@ -114,11 +112,25 @@ h1 {
     transition: visibility 0s 0.5s, opacity .5s; 
   }
 
+.content {
+  box-sizing: border-box;
+  min-width: 320px;
+  max-width: 600px;
+  padding: 0;
+  z-index: 0;
+  height: calc(100vh - 50px);
+  position: fixed;
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch;
+
+
+
   button {
     border: 1px solid black;
     background-color: white;
     font-weight: bold;
     margin-right: 10px;
+    height: 25px;
   }
 
   .recipe-viewer {
@@ -127,11 +139,28 @@ h1 {
 }
 
 .recipe-list {
+  margin-top: 20px;
+
   ul {
     margin: 0;
     padding: 0;
     list-style-type: none;  
   }
+
+  .recipe-list-item {
+    border-top: 1px solid #dedede;
+
+    h3 {
+      margin-top: 8px;
+      margin-bottom: 0px;
+    }
+
+    p {
+      margin-top: 5px;
+      margin-bottom: 8px;
+    }
+  }
+
 }
 
 form {
@@ -144,6 +173,7 @@ form {
     display: block;
     border: 1px solid $blue;
     margin: 10px 0 0 0;
+    font-size: 16px;
   }
 
   button {
@@ -170,13 +200,13 @@ form {
     width: calc(100% - 320px);
     max-width: none;
 
-    .dimmer-layer {
-      display: none;
-    }
   }
 
   .sidebar {
     position: relative;
+    margin: -50px 0 0 0;
+    // top: 0;
+    // bottom: 0;
     z-index: 0;
     min-width: 0;
     width: 320px;

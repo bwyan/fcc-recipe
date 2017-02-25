@@ -11,7 +11,7 @@ class Header extends React.Component {
 		return(
 			<header>
         <button onClick={e => this.handleToggleSidebar(e)}>
-        	{this.props.sidebarIsExpanded ? '< []' : '[] >'}
+        	{this.props.sidebarIsExpanded ? '<' : '>'}
         </button>
 
         <h1>Cocktail Recipes</h1>
