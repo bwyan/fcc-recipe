@@ -43,10 +43,11 @@ class Editor extends React.Component {
 							name="ingredients"
 							ref={input => this.ingredients = input}
 							defaultValue={this.props.recipe.ingredients}
+							placeholder="Separate, ingredients, with, commas"
 						/>
 					</label>
-					<button type="submit">Save</button>
 					<button onClick={(e) => this.handleCancelButton(e)}>Cancel</button>
+					<button type="submit">Save</button>
 				</form>
 			</div>
 		)	
